@@ -38,7 +38,7 @@ export const ComponentCard = ({ component, index }: ComponentProp) => {
             </Badge>
           </div>
           {/* Hover arrow overlay - right side with blur background */}
-          <div className="absolute inset-y-0 right-0 left-3/4 flex items-center opacity-0 group-hover/link:opacity-100 transition-opacity duration-200 pointer-events-none">
+          <div className="absolute inset-y-0 right-2 left-3/4 flex items-center opacity-0 group-hover/link:opacity-100 transition-opacity duration-200 pointer-events-none">
             <div className="ml-auto h-full w-full flex items-center justify-end px-6 backdrop-blur-sm bg-background/60">
               <span className="text-2xl font-bold text-primary">&gt;</span>
             </div>

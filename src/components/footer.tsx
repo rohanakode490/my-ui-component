@@ -11,7 +11,7 @@ export const Footer = () => {
             Made with <Heart className="h-4 w-4 fill-primary text-primary" />{" "}
             using React, Framer Motion, and shadcn/ui
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 pr-2">
             <a
               href="https://github.com/rohanakode490"
               target="_blank"

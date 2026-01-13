@@ -80,7 +80,7 @@ export const Home = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-16 grid w-full max-w-5xl gap-6 sm:grid-cols-3"
+            className="mt-16 px-4 xl:px-0 grid w-full max-w-5xl gap-6 grid-cols-1 md:grid-cols-3"
           >
             {features.map((feature, index) => (
               <motion.div
