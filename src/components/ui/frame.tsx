@@ -23,22 +23,25 @@ export function Frame({ children, ...props }: FrameProps) {
       );
       const targetHead = doc.head;
 
-      // Clear existing to avoid duplicates on re-renders if simplistic
-      // But for better performance, we should diff. For now, simple append of missing.
+      // Clear existing to avoid duplicates on re-renders
+      const existingClones = Array.from(
+        targetHead.querySelectorAll('link[data-cloned], style[data-cloned]')
+      );
+      existingClones.forEach((el) => el.remove());
+
       sourceStyles.forEach((style) => {
         if (style.tagName === 'LINK') {
           const link = style as HTMLLinkElement;
-          if (!doc.querySelector(`link[href="${link.href}"]`)) {
-            const newLink = doc.createElement('link');
-            newLink.rel = 'stylesheet';
-            newLink.href = link.href;
-            targetHead.appendChild(newLink);
-          }
+          const newLink = doc.createElement('link');
+          newLink.rel = 'stylesheet';
+          newLink.href = link.href;
+          newLink.setAttribute('data-cloned', 'true');
+          targetHead.appendChild(newLink);
         } else if (style.tagName === 'STYLE') {
           const s = style as HTMLStyleElement;
-          // Identifying inline styles is harder, but we can clone them
           const newStyle = doc.createElement('style');
           newStyle.textContent = s.textContent;
+          newStyle.setAttribute('data-cloned', 'true');
           targetHead.appendChild(newStyle);
         }
       });

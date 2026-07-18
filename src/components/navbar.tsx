@@ -16,7 +16,7 @@ export const Navbar = () => {
       animate={{ opacity: 1, y: 0 }}
       className='sticky top-0 pt-2 w-full z-50 border-b border-border/40 bg-background/95 backdrop-blur'
     >
-      <div className='container flex item-center justify-between'>
+      <div className='container flex items-center justify-between'>
         <Link to='/' className='rounded-lg bg-gradient-primary p-2'>
           <CodeIcon />
         </Link>

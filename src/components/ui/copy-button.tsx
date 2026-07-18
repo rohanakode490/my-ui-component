@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Check, Copy } from 'lucide-react';
 import { Button } from './button';
 
@@ -9,12 +9,31 @@ type CopyButtonProps = {
 
 export const CopyButton = ({ text, className = '' }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   async function handleCopy() {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
 
-    setTimeout(() => setCopied(false), 2000);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(() => {
+        setCopied(false);
+        timeoutRef.current = null;
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
   }
 
   return (
