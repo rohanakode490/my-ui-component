@@ -23,7 +23,7 @@ export function DotBackground({
       <div
         className='absolute inset-0 flex items-center justify-center [mask:radial-gradient(ellipse_at_center,transparent_20%,black)]'
         style={{
-          backgroundImage: `radial-gradient(var(--color-foreground) ${dotSize}px, transparent ${dotSize}px)`,
+          backgroundImage: `radial-gradient(var(--foreground) ${dotSize}px, transparent ${dotSize}px)`,
           backgroundSize: `${size}px ${size}px`,
           opacity: 0.3,
         }}

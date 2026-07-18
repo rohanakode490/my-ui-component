@@ -22,8 +22,11 @@ export function NavigationBar() {
   };
 
   useEffect(() => {
+    let rAFId: number;
+
     const updateUnderline = () => {
-      requestAnimationFrame(() => {
+      cancelAnimationFrame(rAFId);
+      rAFId = requestAnimationFrame(() => {
         const targetSection = hoveredSection || activeSection;
         const activeEl = navRefs.current[targetSection];
 
@@ -51,7 +54,10 @@ export function NavigationBar() {
 
     window.addEventListener('resize', updateUnderline);
 
-    return () => window.removeEventListener('resize', updateUnderline);
+    return () => {
+      window.removeEventListener('resize', updateUnderline);
+      cancelAnimationFrame(rAFId);
+    };
   }, [hoveredSection, activeSection, animate, scope]);
 
   return (

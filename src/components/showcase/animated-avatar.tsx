@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import p1 from '@/assets/p1.jpg';
 import p2 from '@/assets/p2.jpg';
 
@@ -10,7 +10,18 @@ export function AnimatedAvatar() {
   const [imageToggled, setImageToggled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [displayedSrc, setDisplayedSrc] = useState(p1);
+  const isMountedRef = useRef(true);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleHoverEnter = () => {
     setIsLoading(true);
@@ -21,6 +32,7 @@ export function AnimatedAvatar() {
       // preload
       const img = new Image();
       img.onload = () => {
+        if (!isMountedRef.current) return;
         // only update after load — prevents fallback flash
         setDisplayedSrc(newSrc);
         setImageToggled((prev) => !prev);
@@ -30,6 +42,7 @@ export function AnimatedAvatar() {
 
       // handle load error gracefully
       img.onerror = () => {
+        if (!isMountedRef.current) return;
         // keep old image, stop loading indicator
         setIsLoading(false);
         timeoutRef.current = null;

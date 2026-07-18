@@ -23,7 +23,7 @@ export function GridBackground({
       <div
         className='absolute inset-0 flex items-center justify-center [mask:radial-gradient(ellipse_at_center,transparent_20%,black)]'
         style={{
-          backgroundImage: `linear-gradient(to right, var(--color-foreground) ${strokeWidth}px, transparent ${strokeWidth}px), linear-gradient(to bottom, var(--color-foreground) ${strokeWidth}px, transparent ${strokeWidth}px)`,
+          backgroundImage: `linear-gradient(to right, var(--foreground) ${strokeWidth}px, transparent ${strokeWidth}px), linear-gradient(to bottom, var(--foreground) ${strokeWidth}px, transparent ${strokeWidth}px)`,
           backgroundSize: `${size}px ${size}px`,
           opacity: 0.3,
         }}

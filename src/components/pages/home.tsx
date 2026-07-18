@@ -61,14 +61,16 @@ export const Home = () => {
             className='flex flex-col gap-4 sm:flex-row'
           >
             <Button
-              asChild
               size='lg'
-              className='bg-gradient-primary text-primary hover:text-primary-foreground hover:opacity-90 '
+              className='bg-gradient-primary text-primary hover:text-primary-foreground hover:opacity-90 cursor-pointer'
+              onClick={() => {
+                document
+                  .getElementById('components-section')
+                  ?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
-              <Link to='/components'>
-                Browse Components
-                <ArrowRight className='ml-2 h-5 w-5' />
-              </Link>
+              Browse Components
+              <ArrowRight className='ml-2 h-5 w-5' />
             </Button>
             <Button asChild size='lg' variant='outline'>
               <Link to='/documentation'>Read Documentation</Link>
@@ -105,7 +107,9 @@ export const Home = () => {
       </section>
 
       {/*components Section*/}
-      <Components />
+      <div id='components-section'>
+        <Components />
+      </div>
     </div>
   );
 };
